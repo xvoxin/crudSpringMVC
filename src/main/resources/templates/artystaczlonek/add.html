@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>	
+	    <title>Dodaj Studenta</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	    <link rel="stylesheet" href="../static/css/stajl.css" th:href="@{/css/stajl.css}"/>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	</head>
+	<body> 
+	
+		<nav class="navbar navbar-inverse navbar-static-top">  	
+			<div class="container-fluid">
+    			<div class="navbar-header">
+      				<a class="navbar-brand" href="#">@xvoxin powered</a>
+    			</div>
+    			<ul class="nav navbar-nav">
+				   	<li><a href="/album">Album</a></li>
+				   	<li><a href="/artysta">Artysta</a></li>
+				   	<li><a href="/czlonek">Członek</a></li>
+				   	<li class="active"><a href="/artystaczlonek">Członek-Artysta</a></li>
+				   	<li><a href="/klient">Klient</a></li>
+				   	<li><a href="/wydawca">Wydawca</a></li>
+			    </ul>
+			</div>
+		</nav>
+		
+		<div class="container">
+		
+		<h3>Dodaj powiązanie</h3>
+		
+		<form th:action="@{/artystaczlonek/add}" th:object="${artystaczlonek}" method="post">	
+			<div class="form-group">
+				<label th:for="czlonek">Czlonek</label>
+				<select class="form-control" th:field="*{czlonek.idczlonek}">
+	            	<option th:each="dropDownItem : ${czlonki}" th:value="${dropDownItem.idczlonek}" 
+	            		th:text="${dropDownItem.imie} + ${' '} + ${dropDownItem.nazwisko}" />
+	        	</select>
+				<span th:errors="*{czlonek.idczlonek}" class="error"></span>
+			</div>
+			
+			<div class="form-group">
+				<label th:for="artysta">Artysta</label>
+				<select class="form-control" th:field="*{artystacz.idartysta}">
+	            	<option th:each="dropDownItem : ${artysci}" th:value="${dropDownItem.idartysta}" th:text="${dropDownItem.nazwa}" />
+	        	</select>
+				<span th:errors="*{artystacz.idartysta}" class="error"></span>
+			</div>
+			
+			<button type="submit" class="btn btn-lg btn-success">Dodaj</button>
+		
+		</form>
+		</div>
+	</body>
+</html>

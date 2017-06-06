@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <title>Album</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	    <link rel="stylesheet" href="../static/css/stajl.css" th:href="@{/css/stajl.css}"/>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse navbar-static-top">  	
+  			<div class="container-fluid">
+    			<div class="navbar-header">
+      				<a class="navbar-brand" href="#">@xvoxin powered</a>
+    			</div>
+    			<ul class="nav navbar-nav">
+				   	<li class="active"><a href="/album">Album</a></li>
+				   	<li><a href="/artysta">Artysta</a></li>
+				   	<li><a href="/czlonek">Członek</a></li>
+				   	<li><a href="/artystaczlonek">Członek-Artysta</a></li>
+				   	<li><a href="/klient">Klient</a></li>
+				   	<li><a href="/wydawca">Wydawca</a></li>
+			    </ul>
+			</div>
+		</nav>
+		
+		<div class="container">
+		
+		<h3>Albumy</h3>
+		
+		<table class="table table-hover">
+			<tr style="background:#0f60e2;color:white">
+				<th>Nazwa</th>
+				<th>Dlugosc</th>
+				<th>Artysta</th>
+				<th>Wydawca</th>
+				<th> </th>
+			</tr>
+			<tr th:each="album, iterStat: ${albums}">
+				<td th:text="${album.nazwa}"></td>
+				<td th:text="${album.dlugosc}"></td>
+				<td th:text="${album.artysta.nazwa}"></td>
+				<td th:text="${album.wydawca.nazwa}"></td>
+				<td style="text-align:right"><a class="btn btn-lg btn-primary btn-sm" th:href="@{'/album/edit?id='} + ${album.idalbum}">Edytuj</a> 
+				<a class="btn btn-lg btn-danger btn-sm" th:href="@{'/album/delete?id='} + ${album.idalbum}" onclick="return confirm('Ale serio?')">Usuń</a></td>
+			</tr>
+		</table>
+		  	<center>
+		  	<ul class='pagination pagination-lg'>
+			    <li><a th:href="@{/album/?page=0}">1</a></li>
+			    <li><a th:href="@{/album/?page=1}">2</a></li>
+			    <li><a th:href="@{/album/?page=2}">3</a></li>
+			    <li><a th:href="@{/album/?page=3}">4</a></li>
+			    <li><a th:href="@{/album/?page=4}">5</a></li>
+		  	</ul>
+		  	</center>
+		<a class="btn btn-lg btn-success" th:href="@{/album/add}">Dodaj</a>
+		
+	    </div>
+	</body>
+</html>

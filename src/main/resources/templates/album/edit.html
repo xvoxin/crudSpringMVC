@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>	
+	    <title>Dodaj Album</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	    <link rel="stylesheet" href="../static/css/stajl.css" th:href="@{/css/stajl.css}"/>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	</head>
+	<body> 
+	
+		<nav class="navbar navbar-inverse navbar-static-top">  	
+  			<div class="container-fluid">
+    			<div class="navbar-header">
+      				<a class="navbar-brand" href="#">@xvoxin powered</a>
+    			</div>
+    			<ul class="nav navbar-nav">
+				   	<li class="active"><a href="/album">Album</a></li>
+				   	<li><a href="/artysta">Artysta</a></li>
+				   	<li><a href="/czlonek">Członek</a></li>
+				   	<li><a href="/artystaczlonek">Członek-Artysta</a></li>
+				   	<li><a href="/klient">Klient</a></li>
+				   	<li><a href="/wydawca">Wydawca</a></li>
+			    </ul>
+			</div>
+		</nav>
+		
+		<div class="container">
+		
+		<h3>co tam</h3>
+		
+		<form th:action="@{'/album/edit?id='} + ${albumEd.idalbum}" th:object="${albumEd}" method="post">	
+			<div class="form-group">
+				<label th:for="name">Id</label>
+				<input class="form-control" th:field="*{idalbum}" th:readonly="true" />
+			</div>
+			<div class="form-group">
+				<label th:for="name">Nazwa</label>
+				<input class="form-control" th:field="*{nazwa}" />
+				<span th:errors="*{nazwa}" class="error"></span>
+			</div>
+			
+			<div class="form-group">
+				<label th:for="dlugosc">Dlugosc</label>
+				<input class="form-control" th:field="*{dlugosc}" />
+				<span th:errors="*{dlugosc}" class="error"></span>
+			</div>
+			
+			<div class="form-group">
+				<label th:for="artysta">Artysta</label>
+				<select class="form-control" th:field="*{artysta.idartysta}" name="gowno">
+	            	<option th:each="dropDownItem : ${artysci}" th:value="${dropDownItem.idartysta}" th:text="${dropDownItem.nazwa}" />
+	        	</select>
+				<span th:errors="*{artysta.idartysta}" class="error"></span>
+			</div>
+			
+			<div class="form-group">
+				<label th:for="wydawca">Wydawca</label>
+				<select class="form-control" th:field="*{wydawca.idwydawca}">
+	            	<option th:each="dropDownItem : ${wydawcy}" th:value="${dropDownItem.idwydawca}" th:text="${dropDownItem.nazwa}" />
+	        	</select>
+				<span th:errors="*{wydawca.idwydawca}" class="error"></span>
+			</div>
+			
+			<button type="submit" class="btn btn-lg btn-success">Edytuj</button>
+		
+		</form>
+		</div>
+	</body>
+</html>
